@@ -1,4 +1,4 @@
-import { Component, useRef, useEffect } from 'react';
+import { Component } from 'react';
 import { StyleSheet, Image, View, Animated } from 'react-native';
 
 class HomeView extends Component {
@@ -8,18 +8,16 @@ class HomeView extends Component {
 	};
 
 	fadeIn = () => {
-		// Will change fadeAnim value to 1 in 5 seconds
 		Animated.timing(this.state.fadeAnim, {
 			toValue: 1,
-			duration: 2000
+			duration: 2000,
 		}).start();
 	};
 	
 	fadeOut = () => {
-		// Will change fadeAnim value to 0 in 3 seconds
 		Animated.timing(this.state.fadeAnim, {
 			toValue: 0,
-			duration: 1500
+			duration: 1500,
 		}).start();
 	};
 
