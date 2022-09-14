@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<style>
+* {
+    border: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body, canvas {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(0turn, #7fa881, #ffffff);
+    overflow: hidden;
+}
+
+</style>
+    <canvas></canvas>
+
+    <script>
+
+function bezierAtT(t,xa,ya,xb,yb,xc,yc,xd,yd) {
+    return [
+    ((1-t)**3)*xa + ((1-t)**2)*xb*t*3 + 3*(1-t)*(t**2)*xc + (t**3)*xd
+     ,
+     ((1-t)**3)*ya + ((1-t)**2)*yb*t*3 + 3*(1-t)*(t**2)*yc + (t**3)*yd
+    ]
+}
+const canvas = document.querySelector('canvas');
+const dessin = canvas.getContext('2d');
+
+canvas.width = window.innerWidth
+canvas.height = window.innerHeight
+
+const COUNT = 15;
+
+let groundPos = [... new Array(COUNT)].map( () => Math.random() * canvas.width )
+let branchHeight = [... new Array(COUNT)].map( () => (Math.random() * canvas.height * 0.6   ) + (canvas.height*0.2) )
+
+let FRAME = 0;
+
+let windOfset = [... new Array(COUNT)].map( () => [Math.random(),Math.random(),Math.random()] )
+
+function draw() {
+
+    FRAME+=0.02;
+
+    // Clear
+    dessin.clearRect(0,0,canvas.width,canvas.height)
+
+    // Branche
+    dessin.strokeStyle = '#207024'
+    dessin.beginPath();
+    for(let i=0 ; i<COUNT ; i++) {
+        dessin.moveTo( groundPos[i] , canvas.height )
+        dessin.bezierCurveTo( 
+            groundPos[i] + 80*Math.sin(FRAME+windOfset[i][0]), canvas.height - 1*branchHeight[i]/3,
+            groundPos[i] + 80*Math.cos(FRAME+windOfset[i][1]), canvas.height - 2*branchHeight[i]/3,
+            groundPos[i] + 80*Math.cos(FRAME+windOfset[i][2]), canvas.height - 3*branchHeight[i]/3)
+    }
+    dessin.stroke();
+    dessin.closePath();
+
+    // Fleur
+    dessin.strokeStyle = '#ffffff'
+    for(let i=0 ; i<COUNT ; i++) {
+        const x =  groundPos[i] + 80*Math.cos(FRAME+windOfset[i][2]);
+        const y =  canvas.height - 3*branchHeight[i]/3;
+        if( i <COUNT * 0.7 ) {
+            for(let k=0;k<5;k++) {
+                dessin.fillStyle = (i%2)?'#202470':'#8285b5'
+                dessin.beginPath();
+                dessin.moveTo( x , y )
+                dessin.bezierCurveTo( 
+                    
+
+                        x + Math.cos(Math.PI*2*k/5)*25 + Math.cos( (Math.PI/2) + Math.PI*2*k/5 )*10
+                        ,
+                        y + Math.sin(Math.PI*2*k/5)*25 + Math.sin( (Math.PI/2) + Math.PI*2*k/5 )*10
+                    
+                    
+
+                    ,
+
+                        x + Math.cos(Math.PI*2*k/5)*35 + Math.cos( (Math.PI/2) + Math.PI*2*k/5 )*10
+                        ,
+                        y + Math.sin(Math.PI*2*k/5)*35 + Math.sin( (Math.PI/2) + Math.PI*2*k/5 )*10
+                    
+                    ,
+
+
+                        x+Math.cos(Math.PI*2*k/5)*50
+                        ,
+                        y+Math.sin(Math.PI*2*k/5)*50
+                )
+                dessin.moveTo( x , y )
+                dessin.bezierCurveTo( 
+                    
+
+                        x + Math.cos(Math.PI*2*k/5)*25 - Math.cos( (Math.PI/2) + Math.PI*2*k/5 )*10
+                        ,
+                        y + Math.sin(Math.PI*2*k/5)*25 - Math.sin( (Math.PI/2) + Math.PI*2*k/5 )*10
+                    
+                    
+
+                    ,
+
+                        x + Math.cos(Math.PI*2*k/5)*35 - Math.cos( (Math.PI/2) + Math.PI*2*k/5 )*10
+                        ,
+                        y + Math.sin(Math.PI*2*k/5)*35 - Math.sin( (Math.PI/2) + Math.PI*2*k/5 )*10
+                    
+                    ,
+
+
+                        x+Math.cos(Math.PI*2*k/5)*50
+                        ,
+                        y+Math.sin(Math.PI*2*k/5)*50
+                )
+                dessin.stroke();
+                dessin.fill();
+                let kk = k+0.5;
+                dessin.fillStyle = (!(i%2))?'#202470':'#8285b5'
+                dessin.beginPath();
+                dessin.moveTo( x , y )
+                dessin.bezierCurveTo( 
+                    
+
+                        x + Math.cos(Math.PI*2*kk/5)*12 + Math.cos( (Math.PI/2) + Math.PI*2*kk/5 )*7
+                        ,
+                        y + Math.sin(Math.PI*2*kk/5)*12 + Math.sin( (Math.PI/2) + Math.PI*2*kk/5 )*7
+                    
+                    
+
+                    ,
+
+                        x + Math.cos(Math.PI*2*kk/5)*18 + Math.cos( (Math.PI/2) + Math.PI*2*kk/5 )*7
+                        ,
+                        y + Math.sin(Math.PI*2*kk/5)*18 + Math.sin( (Math.PI/2) + Math.PI*2*kk/5 )*7
+                    
+                    ,
+
+
+                        x+Math.cos(Math.PI*2*kk/5)*30
+                        ,
+                        y+Math.sin(Math.PI*2*kk/5)*30
+                )
+                dessin.moveTo( x , y )
+                dessin.bezierCurveTo( 
+                    
+
+                        x + Math.cos(Math.PI*2*kk/5)*8 - Math.cos( (Math.PI/2) + Math.PI*2*kk/5 )*5
+                        ,
+                        y + Math.sin(Math.PI*2*kk/5)*8 - Math.sin( (Math.PI/2) + Math.PI*2*kk/5 )*5
+                    
+                    
+
+                    ,
+
+                        x + Math.cos(Math.PI*2*kk/5)*13 - Math.cos( (Math.PI/2) + Math.PI*2*kk/5 )*5
+                        ,
+                        y + Math.sin(Math.PI*2*kk/5)*13 - Math.sin( (Math.PI/2) + Math.PI*2*kk/5 )*5
+                    
+                    ,
+
+
+                        x+Math.cos(Math.PI*2*kk/5)*20
+                        ,
+                        y+Math.sin(Math.PI*2*kk/5)*20
+                )
+                dessin.stroke();
+                dessin.fill();
+            }
+        } else {
+            let AnchorPoint = [
+            groundPos[i]                                     , canvas.height - 0*branchHeight[i]/3,
+            groundPos[i] + 80*Math.sin(FRAME+windOfset[i][0]), canvas.height - 1*branchHeight[i]/3,
+            groundPos[i] + 80*Math.cos(FRAME+windOfset[i][1]), canvas.height - 2*branchHeight[i]/3,
+            groundPos[i] + 80*Math.cos(FRAME+windOfset[i][2]), canvas.height - 3*branchHeight[i]/3
+            ]
+
+            for(let t=0.5   ; t<1 ; t+=0.08*(1 - (branchHeight[i]/canvas.height))**0.2) {
+                let [xt,yt] = bezierAtT(t,...AnchorPoint);
+                dessin.fillStyle = (i%2)?'#202470':'#8285b5'
+                dessin.beginPath();
+                dessin.moveTo( xt , yt )
+                k=4.2+Math.cos(FRAME+windOfset[i][2])/3.5
+                dessin.bezierCurveTo( 
+                    
+
+                        xt + Math.cos(Math.PI*2*k/5)*7.5 + Math.cos( (Math.PI/2) + Math.PI*2*k/5 )*15
+                        ,
+                        yt + Math.sin(Math.PI*2*k/5)*7.5 + Math.sin( (Math.PI/2) + Math.PI*2*k/5 )*15
+                    
+                    
+
+                    ,
+
+                        xt + Math.cos(Math.PI*2*k/5)*22.5 + Math.cos( (Math.PI/2) + Math.PI*2*k/5 )*15
+                        ,
+                        yt + Math.sin(Math.PI*2*k/5)*22.5 + Math.sin( (Math.PI/2) + Math.PI*2*k/5 )*15
+                    
+                    ,
+
+
+                        xt+Math.cos(Math.PI*2*k/5)*35
+                        ,
+                        yt+Math.sin(Math.PI*2*k/5)*35
+                )
+                dessin.moveTo( xt , yt )
+                dessin.bezierCurveTo( 
+                    
+
+                        xt + Math.cos(Math.PI*2*k/5)*7.5 + Math.cos( (Math.PI/2) + Math.PI*2*k/5 )*-15
+                        ,
+                        yt + Math.sin(Math.PI*2*k/5)*7.5 + Math.sin( (Math.PI/2) + Math.PI*2*k/5 )*-15
+                    
+                    
+
+                    ,
+
+                        xt + Math.cos(Math.PI*2*k/5)*22.5 + Math.cos( (Math.PI/2) + Math.PI*2*k/5 )*4
+                        ,
+                        yt + Math.sin(Math.PI*2*k/5)*22.5 + Math.sin( (Math.PI/2) + Math.PI*2*k/5 )*4
+                    
+                    ,
+
+
+                        xt+Math.cos(Math.PI*2*k/5)*35
+                        ,
+                        yt+Math.sin(Math.PI*2*k/5)*35
+                )
+                dessin.stroke();
+                dessin.fill();
+                [xt,yt] = bezierAtT(t+0.02,...AnchorPoint);
+                k=3.2+Math.cos(FRAME+windOfset[i][2])**2/20
+                dessin.moveTo( xt , yt )
+                dessin.bezierCurveTo( 
+                    
+
+                        xt + Math.cos(Math.PI*2*k/5)*7.5 + Math.cos( (Math.PI/2) + Math.PI*2*k/5 )*15
+                        ,
+                        yt + Math.sin(Math.PI*2*k/5)*7.5 + Math.sin( (Math.PI/2) + Math.PI*2*k/5 )*15
+                    
+                    
+
+                    ,
+
+                        xt + Math.cos(Math.PI*2*k/5)*22.5 + Math.cos( (Math.PI/2) + Math.PI*2*k/5 )*15
+                        ,
+                        yt + Math.sin(Math.PI*2*k/5)*22.5 + Math.sin( (Math.PI/2) + Math.PI*2*k/5 )*15
+                    
+                    ,
+
+
+                        xt+Math.cos(Math.PI*2*k/5)*35
+                        ,
+                        yt+Math.sin(Math.PI*2*k/5)*35
+                )
+                dessin.moveTo( xt , yt )
+                dessin.bezierCurveTo( 
+                    
+
+                        xt + Math.cos(Math.PI*2*k/5)*7.5 + Math.cos( (Math.PI/2) + Math.PI*2*k/5 )*-15
+                        ,
+                        yt + Math.sin(Math.PI*2*k/5)*7.5 + Math.sin( (Math.PI/2) + Math.PI*2*k/5 )*-15
+                    
+                    
+
+                    ,
+
+                        xt + Math.cos(Math.PI*2*k/5)*22.5 + Math.cos( (Math.PI/2) + Math.PI*2*k/5 )*4
+                        ,
+                        yt + Math.sin(Math.PI*2*k/5)*22.5 + Math.sin( (Math.PI/2) + Math.PI*2*k/5 )*4
+                    
+                    ,
+
+
+                        xt+Math.cos(Math.PI*2*k/5)*35
+                        ,
+                        yt+Math.sin(Math.PI*2*k/5)*35
+                )
+                dessin.stroke();
+                dessin.fill();
+            }
+        }
+    }
+
+    window.requestAnimationFrame( draw )
+}
+draw()
+
+    </script>
+</body>
+</html>

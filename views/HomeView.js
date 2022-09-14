@@ -38,6 +38,12 @@ class HomeView extends Component {
 							source={require('../assets/partenaires/ua.png')} 
 							style={styles.partenaireLogo}/>
 						<Image
+							source={require('../assets/partenaires/pci.png')} 
+							style={styles.partenaireLogo}/>
+						<Image
+							source={require('../assets/partenaires/campus_day.png')} 
+							style={styles.partenaireLogo}/>
+						<Image
 							source={require('../assets/partenaires/cvec.png')} 
 							style={styles.partenaireLogo}/>
 					</Animated.View>

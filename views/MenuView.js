@@ -18,7 +18,7 @@ class MenuView extends Component {
 				{ 
 					liste : data.map( ([Name,Done]) => (
 						<Text style={{color: 'white', padding: 4}}> 
-							{ Done ? (<Text style={{color:'red'}}>✓</Text>) : (<Text style={{color:'red'}}>✗</Text>) 						} 
+							{ Done ? (<Text style={{color:'red', marginRight: 10}}>✓</Text>) : (<Text style={{color:'red', marginRight: 10}}>✗</Text>) } 
 							{Name} 
 						</Text>
 					) ),
