@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, PermissionsAndroid } from 'react-native';
 
 import SokobanService from '../services/SokobanService.js';
 
@@ -12,12 +12,15 @@ class MenuView extends Component {
 	}
 
 	componentDidMount () {
+
+		PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA);
+
 		SokobanService.getStatusListe()
 			.then( obj => Object.entries(obj) )
 			.then( (data) => this.setState(
 				{ 
-					liste : data.map( ([Name,Done]) => (
-						<Text style={{color: 'white', padding: 4}}> 
+					liste : data.map( ([Name,Done],i) => (
+						<Text style={{color: 'white', padding: 4}} key={`${i}`}> 
 							{ Done ? (<Text style={{color:'red', marginRight: 10}}>✓</Text>) : (<Text style={{color:'red', marginRight: 10}}>✗</Text>) } 
 							{Name} 
 						</Text>

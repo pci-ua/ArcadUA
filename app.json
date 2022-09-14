@@ -18,7 +18,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "arcadua.projetcohesion.info"
     },
     "android": {
       "adaptiveIcon": {
