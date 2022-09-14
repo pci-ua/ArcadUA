@@ -29,6 +29,17 @@ export default class SokobanService {
         } )
     }
 
+    static isThisAValidCode( code ) {
+        if(
+            code.match(/^\{PCi:CampusDay:2022:[a-zA-Z ]+\}$/)
+        ) {
+            let [_,bde] = code.match(/^\{PCi:CampusDay:2022:([a-zA-Z ]+)\}$/);
+            if( levelsData[bde] ) {
+                return bde;
+            }
+        }
+        return null;
+    }
     
 
 }

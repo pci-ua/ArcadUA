@@ -31,6 +31,9 @@ class HomeView extends Component {
 		return (
 				<View style={styles.app}>
 					<Animated.Image
+						source={require('../assets/event.png')}
+						style={{ width: 100, height: 130 , opacity: this.state.fadeAnim}}/>
+					<Animated.Image
 						source={require('../assets/logo.png')} 
 						style={{ width: 200, height: 200 , opacity: this.state.fadeAnim}}/>
 					<Animated.View style={{...styles.partenaire, opacity: this.state.fadeAnim}}>
@@ -40,9 +43,7 @@ class HomeView extends Component {
 						<Image
 							source={require('../assets/partenaires/pci.png')} 
 							style={styles.partenaireLogo}/>
-						<Image
-							source={require('../assets/partenaires/campus_day.png')} 
-							style={styles.partenaireLogo}/>
+
 						<Image
 							source={require('../assets/partenaires/cvec.png')} 
 							style={styles.partenaireLogo}/>
