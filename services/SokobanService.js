@@ -31,9 +31,9 @@ export default class SokobanService {
 
     static isThisAValidCode( code ) {
         if(
-            code.match(/^https:\/\/projetcohesion\.info\/Campus2022\#([a-zA-Z_]+)$/)
+            code.match(/^https:\/\/projetcohesion\.info\/CampusDay2022\#([a-zA-Z_]+)$/)
         ) {
-            let [_,bde] = code.match(/^https:\/\/projetcohesion\.info\/Campus2022\#([a-zA-Z_]+)$/);
+            let [_,bde] = code.match(/^https:\/\/projetcohesion\.info\/CampusDay2022\#([a-zA-Z_]+)$/);
             if( levelsData[bde.replace(/_/g,' ')] ) {
                 return bde.replace(/_/g,' ');
             }
