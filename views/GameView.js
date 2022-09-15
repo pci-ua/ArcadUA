@@ -2,12 +2,8 @@ import { Component } from 'react';
 import { StyleSheet, Image, View, Button, Text } from 'react-native';
 
 import SokobanService from '../services/SokobanService.js';
-import RNFS from 'react-native-fs';
 
 import { LinearGradient } from 'expo-linear-gradient';
-import Canvas, { Image as CanvasImage } from 'react-native-canvas';
-
-import Grid from 'react-native-grid-component';
 
 class GameView extends Component {
 

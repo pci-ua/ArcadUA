@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import { StyleSheet, Text, View, Button, PermissionsAndroid, Image } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
 
 import { LinearGradient } from 'expo-linear-gradient';
 import SokobanService from '../services/SokobanService.js';
@@ -55,7 +54,7 @@ class MenuView extends Component {
 		this.props.navigation.addListener( 'focus', (function() {
 			SokobanService.getStatusListe()
 				.then( obj => Object.entries(obj) )
-				.then( d => { console.log(d); return d;} )
+				.then( d => { console.log('FOCUS TRIGGER'); return d;} )
 				.then( (data) => this.setState(
 					{ 
 						liste : data.map( ([Name,Done],i) => (
