@@ -34,7 +34,6 @@ export default class SokobanService {
             code.match(/^https:\/\/projetcohesion\.info\/Campus2022\#([a-zA-Z_]+)$/)
         ) {
             let [_,bde] = code.match(/^https:\/\/projetcohesion\.info\/Campus2022\#([a-zA-Z_]+)$/);
-            console.log(bde);
             if( levelsData[bde.replace(/_/g,' ')] ) {
                 return bde.replace(/_/g,' ');
             }
