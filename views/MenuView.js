@@ -55,7 +55,7 @@ class MenuView extends Component {
 			SokobanService.getStatusListe()
 				.then( obj => Object.entries(obj) )
 				.then( d => { console.log('FOCUS TRIGGER'); return d;} )
-				.then( (data) => this.setState(
+				.then( ( function (data) { this.setState(
 					{ 
 						liste : data.map( ([Name,Done],i) => (
 							<Text style={{color: 'black'}} key={`${i}`}> 
@@ -73,8 +73,9 @@ class MenuView extends Component {
 						total: data.length,
 						count: data.reduce( (acc,cur) => acc+(cur[1]?1:0) , 0 )
 					}
-				) )
-		}) )
+				) } ).bind(this) )
+				.catch( (...z) => console.log('k',z) )
+		}).bind(this) )
 	}
 	scanner() {
 		this.props.navigation.navigate('scan');

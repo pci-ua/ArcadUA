@@ -113,7 +113,7 @@ class GameView extends Component {
 
 	end() {
 		if( SokobanService.isThisAWinGame( GameView.gameState ) ) {
-			SokobanService.win( GameView.map ).then( () => {;
+			SokobanService.win( GameView.map ).then( () => {
 				this.props.navigation.navigate('menu');
 			});
 		}
@@ -121,7 +121,6 @@ class GameView extends Component {
 
 	// Moteur de jeu
 	update(move) {
-		console.log({move})
 		let px,py;
 
 		for(let i=0;i<10;i++) {
