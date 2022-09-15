@@ -26,6 +26,13 @@ class HomeView extends Component {
 		this.fadeIn();
 		setTimeout( (this.fadeOut).bind(this) , 3000 );
 		setTimeout( () => this.props.navigation.navigate('menu') , 5000 );
+		setTimeout( (this.neverComeBackAgainHere).bind(this) , 5555 );
+	}
+
+	neverComeBackAgainHere() {
+		this.props.navigation.addListener( 'focus', (function() {
+			this.props.navigation.navigate('menu')
+		}).bind(this) );
 	}
 
 	render() {
