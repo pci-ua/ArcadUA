@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { StyleSheet, Image, View, Animated } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 class HomeView extends Component {
 
@@ -29,7 +30,9 @@ class HomeView extends Component {
 
 	render() {
 		return (
-				<View style={styles.app}>
+			<LinearGradient
+				colors={['#ffffff','#7fa881']}
+				style={styles.app}>
 					<Animated.Image
 						source={require('../assets/event.png')}
 						style={{ width: 100, height: 130 , opacity: this.state.fadeAnim}}/>
@@ -48,7 +51,7 @@ class HomeView extends Component {
 							source={require('../assets/partenaires/cvec.png')} 
 							style={styles.partenaireLogo}/>
 					</Animated.View>
-				</View>
+				</LinearGradient>
 		);
 	}
 }
