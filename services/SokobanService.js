@@ -72,7 +72,7 @@ export default class SokobanService {
     static async win( id ) {
         let statusListe = await SokobanService.getStatusListe();
         statusListe[ id ] = true;
-        await AsyncStorage.setItem( 
+        return await AsyncStorage.setItem( 
             'levels_completed' , 
             JSON.stringify( statusListe)
         );
