@@ -26,6 +26,7 @@ class MenuView extends Component {
 			"PCi" : require('../assets/associations/PCi.png'),
 			"PEGAZH" : require('../assets/associations/PEGAZH.png'),
 			"UACMI" : require('../assets/associations/UACMI.png'),
+			"APA" : require('../assets/associations/APA.png'),
 		};
 		PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA);
 
